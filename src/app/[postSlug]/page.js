@@ -7,6 +7,13 @@ import {loadBlogPost} from "@/helpers/file-helpers";
 import {MDXRemote} from "next-mdx-remote/rsc";
 import {BLOG_TITLE} from "@/constants";
 import CodeSnippet from "@/components/CodeSnippet";
+import Spinner from "@/components/Spinner";
+import dynamic from "next/dynamic";
+
+const DivisionGroupsDemo = dynamic(
+    () => import('@/components/DivisionGroupsDemo'),
+    { loading: Spinner }
+);
 
 const getBlogPost = React.cache(async (slug) => {
     return await loadBlogPost(slug);
@@ -44,7 +51,7 @@ async function BlogPost({params}) {
                 publishedOn={frontmatter.publishedOn}
             />
             <div className={styles.page}>
-                {content && <MDXRemote source={content} components={{ ...components }}/>}
+                {content && <MDXRemote source={content} components={{ ...components, DivisionGroupsDemo }}/>}
             </div>
         </article>
     );
