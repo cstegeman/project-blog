@@ -12,7 +12,12 @@ import dynamic from "next/dynamic";
 
 const DivisionGroupsDemo = dynamic(
     () => import('@/components/DivisionGroupsDemo'),
-    { loading: Spinner }
+    {loading: Spinner}
+);
+
+const CircularColorsDemo = dynamic(
+    () => import('@/components/CircularColorsDemo'),
+    {loading: Spinner}
 );
 
 const getBlogPost = React.cache(async (slug) => {
@@ -51,7 +56,8 @@ async function BlogPost({params}) {
                 publishedOn={frontmatter.publishedOn}
             />
             <div className={styles.page}>
-                {content && <MDXRemote source={content} components={{ ...components, DivisionGroupsDemo }}/>}
+                {content &&
+                    <MDXRemote source={content} components={{...components, DivisionGroupsDemo, CircularColorsDemo}}/>}
             </div>
         </article>
     );

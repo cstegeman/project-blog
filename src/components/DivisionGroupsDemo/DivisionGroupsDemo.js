@@ -89,7 +89,6 @@ function DivisionGroupsDemo({
                         {range(remainder).map((index) => {
                             const leftover = numOfGroups * numOfItemsPerGroup
                             const layoutId = `${id}-${leftover + index}`;
-                            console.log(layoutId)
 
                             return (
                                 <motion.div layoutId={layoutId} key={layoutId} className={styles.item}/>
