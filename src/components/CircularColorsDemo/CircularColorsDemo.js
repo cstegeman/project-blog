@@ -33,10 +33,7 @@ function CircularColorsDemo() {
         }
         return () => clearInterval(interval);
     }, [isRunning]);
-
-    // TODO: This value should cycle through the colors in the
-    // COLORS array:
-    // const selectedColor = COLORS[0];
+    
     const selectedColor = COLORS[timeElapsed % COLORS.length];
 
     return (
