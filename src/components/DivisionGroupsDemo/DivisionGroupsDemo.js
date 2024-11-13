@@ -19,6 +19,8 @@ function DivisionGroupsDemo({
         initialNumOfGroups
     );
 
+    const id = React.useId();
+
     const numOfItemsPerGroup = Math.floor(
         numOfItems / numOfGroups
     );
@@ -64,7 +66,7 @@ function DivisionGroupsDemo({
                         {range(numOfGroups).map((groupIndex) => (
                             <div key={groupIndex} className={styles.group}>
                                 {range(numOfItemsPerGroup).map((index) => {
-                                    const layoutId = `${index+(groupIndex * numOfItemsPerGroup)}`
+                                    const layoutId = `${id}-${index + (groupIndex * numOfItemsPerGroup)}`
                                     return (
                                         <motion.div
                                             layoutId={layoutId}
@@ -77,21 +79,25 @@ function DivisionGroupsDemo({
                         ))}
                     </div>
                 </div>
+
+                {includeRemainderArea && (
+                    <div className={styles.remainderArea}>
+                        <p className={styles.remainderHeading}>
+                            Remainder Area
+                        </p>
+
+                        {range(remainder).map((index) => {
+                            const leftover = numOfGroups * numOfItemsPerGroup
+                            const layoutId = `${id}-${leftover + index}`;
+                            console.log(layoutId)
+
+                            return (
+                                <motion.div layoutId={layoutId} key={layoutId} className={styles.item}/>
+                            );
+                        }).reverse()}
+                    </div>
+                )}
             </LayoutGroup>
-
-            {includeRemainderArea && (
-                <div className={styles.remainderArea}>
-                    <p className={styles.remainderHeading}>
-                        Remainder Area
-                    </p>
-
-                    {range(remainder).map((index) => {
-                        return (
-                            <div key={index} className={styles.item}/>
-                        );
-                    })}
-                </div>
-            )}
 
             <Equation
                 dividend={numOfItems}
