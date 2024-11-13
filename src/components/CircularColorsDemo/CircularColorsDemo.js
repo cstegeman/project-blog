@@ -33,7 +33,7 @@ function CircularColorsDemo() {
         }
         return () => clearInterval(interval);
     }, [isRunning]);
-    
+
     const selectedColor = COLORS[timeElapsed % COLORS.length];
 
     return (
